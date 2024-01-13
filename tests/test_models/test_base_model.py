@@ -2,12 +2,13 @@
 """
 Define Unittest,
 """
+import models
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
 
 
-class TestBaseModel(unitest.TestCase):
+class TestBaseModel(unittest.TestCase):
     """
     Unittest tsting inst,
     """
