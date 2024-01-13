@@ -1,11 +1,23 @@
+#!/usr/bin/python3
+"""BaseModel class creat and manage model inst,"""
 import uuid
 from datetime import datetime
 import models
 
+
 class BaseModel:
+    """
+    Represents BaseModel that will creat and manage model inst.
+    """
     def __init__(self, *ag_p, **krgs):
+        """
+        Initialization:
+        Args:
+            *ag_p: will not use it,
+            **krgs: kp and vp of attributes.
+        """
         if krgs:
-            for  kp, vp in krgs.items():
+            for kp, vp in krgs.items():
                 if kp == "__class__":
                     continue
                 if kp in ["created_at", "updated_at"]:
@@ -19,13 +31,16 @@ class BaseModel:
         models.storage.new(self)
 
     def __str__(self):
+        """Return str repr,"""
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}]"
 
     def save(self):
+        """updated_at will be updated with the crnt dtime,"""
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
+        """Return 'dict' of BaseModel,"""
         self.created_at = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
         self.updated_at = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
         self.__dict__['__class__'] = self.__class__.__name__
