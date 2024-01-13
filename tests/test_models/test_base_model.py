@@ -14,6 +14,9 @@ class TestBaseModel(unittest.TestCase):
     def test_inst(self):
         self.assertIn(BaseModel(), models.storage.all().values())
 
+    def test_id(self):
+        self.assertEqual(str, type(BaseModel.id))
+
 
 if __name__ == "__main__":
     unittest.main()
