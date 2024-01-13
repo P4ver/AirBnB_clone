@@ -1,18 +1,29 @@
 #!/usr/bin/python3
+"""
+module serial & deserial,
+"""
 import json
 from models.base_model import BaseModel
 
+
 class FileStorage:
+    """
+    Filestorage cls, (serial/deserial)
+    """
     __file_path = "file.json"
     __objects = {}
+
     def all(self):
+        """Return dict __obj,"""
         return FileStorage.__objects
 
     def new(self, obj):
+        """the key in __obj,"""
         key_o = f"{self.__class__.__name__}.{obj.id}"
         FileStorage.__objects[key_o] = obj
 
     def save(self):
+        """serial __obj to json"""
         dict_o = {}
         for kp in FileStorage.__objects.keys():
             dict_o[kp] = FileStorage.__objects[kp].to_dict()
@@ -21,6 +32,7 @@ class FileStorage:
             json.dump(dict_o, js_fl)
 
     def reload(self):
+        """deserial json to __obj,"""
         try:
             with open(FileStorage.__file_path, "r", encoding="utf-8") as n_fl:
                 return json.load(n_fl)
