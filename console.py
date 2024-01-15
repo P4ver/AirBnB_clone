@@ -13,6 +13,7 @@ class HBNBCommand(cmd.Cmd):
     """entry point of the command interpreter class,"""
     prompt = '(hbnb) '
     cls_s = ["BaseModel"]
+
     def do_EOF(self, ag):
         """'ctrl + d'end of file (to exit)"""
         print()
