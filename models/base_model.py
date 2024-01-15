@@ -41,7 +41,8 @@ class BaseModel:
 
     def to_dict(self):
         """Return 'dict' of BaseModel,"""
-        self.created_at = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
-        self.updated_at = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
+        dct_o = self.__dict__.copy()
+        dct_o["created_at"] = self.created_at.isoformat()
+        dct_o["updated_at"] = self.updated_at.isoformat()
         self.__dict__['__class__'] = self.__class__.__name__
-        return self.__dict__
+        return dct_o
