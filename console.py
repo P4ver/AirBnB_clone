@@ -103,6 +103,37 @@ class HBNBCommand(cmd.Cmd):
                 if ky.split('.')[0] == ag_s[0]:
                     print(str(vl))
 
+    def do_update(self, ag):
+        """
+        update an inst based on cls,
+        """
+        ag_s = shlex.split(ag)
+        if not ag_s:
+            print("** class name missing **")
+        elif ag_s[0] not in self.cls_s:
+            print("** class doesn't exist **")
+        elif len(ag_s) < 2:
+            print("** instance id missing **")
+        else:
+            k_y = ag_s[0] + "." + ag_s[1]
+            o_dict = storage.all()
+            if k_y not in o_dict:
+                print("** no instance found **")
+            elif len(ag_s) < 3:
+                print("** attribute name missing **")
+            elif len(ag_s) < 4:
+                print("** value missing **")
+            else:
+                attrname = ag_s[2]
+                attrval = ag_s[3]
+                try:
+                    attrval = eval(attrval)
+                except Exception:
+                    pass
+                ob_j = o_dict[k_y]
+                setattr(ob_j, attrname, attrval)
+                ob_j.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
