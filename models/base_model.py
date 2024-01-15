@@ -44,5 +44,5 @@ class BaseModel:
         dct_o = self.__dict__.copy()
         dct_o["created_at"] = self.created_at.isoformat()
         dct_o["updated_at"] = self.updated_at.isoformat()
-        self.__dict__['__class__'] = self.__class__.__name__
+        dct_o['__class__'] = self.__class__.__name__
         return dct_o
