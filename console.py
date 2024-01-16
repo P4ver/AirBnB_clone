@@ -5,6 +5,7 @@ consol prjct,
 import cmd
 import json
 import shlex
+import models
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
